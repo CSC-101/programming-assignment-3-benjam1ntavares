@@ -90,6 +90,57 @@ def population_below_poverty_level(counties: list[CountyDemographics]) -> float:
 
 
 
+# Part 4
+########################################################################################################################
+
+#percent_by_education
+########################################################################################################################
+# percent_by_education will take two parameters, a list of county demographics, and a key to determine the percentage of
+# people out of the total population of the counties, the function will utilize the total population funciton and the
+# population by eduction functions defined above
+
+def percent_by_education(counties: list[CountyDemographics], education_level: str) -> float:
+    total_pop = population_total(counties)
+    educated_pop = population_by_education(counties, education_level)
+    if total_pop > 0:
+        return (educated_pop / total_pop) * 100
+    else:
+        return 0
+
+
+# percent_by_ethnicity
+#######################################################################################################################
+# the percent by ethnicity function will use the total population function, and the population by ethnicity functions to
+# return a percentage of the population that is a certain ethnicity.
+
+def percent_by_ethnicity(counties: list[CountyDemographics], ethnicity: str) -> float:
+    total_pop = population_total(counties)
+    ethnicity_pop = population_by_ethnicity(counties, ethnicity)
+    if total_pop > 0:
+        return (ethnicity_pop / total_pop) * 100
+    else:
+        return 0
+
+
+# percent_below_poverty_level
+########################################################################################################################
+# the percent below poverty level function will use pre-defined functions to find the total population of the list,
+# and the total population of people below the poverty level. it will then divide the two and return the result as a
+# percentage
+
+def percent_below_poverty_level(counties: list[CountyDemographics]) -> float:
+    total_pop = population_total(counties)
+    impoverished_pop = population_below_poverty_level(counties)
+    if total_pop > 0:
+        return (impoverished_pop / total_pop) * 100
+    else:
+        return 0
+
+
+
+
+
+
 
 
 

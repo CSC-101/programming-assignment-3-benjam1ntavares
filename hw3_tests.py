@@ -289,15 +289,68 @@ class TestCases(unittest.TestCase):
         actual = hw3.population_below_poverty_level(input_demographics)
         self.assertAlmostEqual(expected, actual)
 
-    def test_population_below
+    # test with reduced data
+    def test_population_below_poverty_level(self):
+        input_demographics = reduced_data
+        expected = 107711.714
+        actual = hw3.population_below_poverty_level(input_demographics)
+        self.assertAlmostEqual(expected, actual)
 
-    # test population_by_ethnicity
-    # test population_below_poverty_level
 
     # Part 4
     # test percent_by_education
+    def test_percent_by_education(self):
+        input_demographics = slo_data
+        education = "Bachelor's Degree or Higher"
+        expected = 31.5
+        actual = hw3.percent_by_education(input_demographics,education)
+        self.assertEqual(expected, actual)
+
+    def test_percent_by_education2(self):
+        input_demographics = reduced_data
+        education = "Bachelor's Degree or Higher"
+        expected = 20.9
+        actual = hw3.percent_by_education(input_demographics,education)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_percent_by_education3(self):
+        input_demographics = full_data
+        education = "Bachelor's Degree or Higher"
+        expected = 20.9
+        actual = hw3.percent_by_education(input_demographics,education)
+        self.assertAlmostEqual(expected, actual)
+
+
+
     # test percent_by_ethnicity
+
+    def test_percent_by_ethnicity(self):
+        input_demographics = slo_data
+        ethnicity = 'Asian Alone'
+        expected = 3.8
+        actual = hw3.percent_by_ethnicity(input_demographics,ethnicity)
+        self.assertEqual(expected, actual)
+
+    def test_percent_by_ethnicity2(self):
+        input_demographics = full_data
+        ethnicity = 'Asian Alone'
+        expected = 1.1
+        actual = hw3.percent_by_ethnicity(input_demographics,ethnicity)
+        self.assertAlmostEqual(expected, actual)
+
+
     # test percent_below_poverty_level
+    def test_percent_below_poverty_level(self):
+        input_demographics = slo_data
+        expected = 14.3
+        actual = hw3.percent_below_poverty_level(input_demographics)
+        self.assertEqual(expected, actual)
+
+    def test_percent_below_poverty_level2(self):
+        input_demographics = reduced_data
+        expected = 16.42
+        actual = hw3.percent_below_poverty_level(input_demographics)
+        self.assertAlmostEqual(expected, actual, places=2)
 
     # Part 5
     # test education_greater_than
