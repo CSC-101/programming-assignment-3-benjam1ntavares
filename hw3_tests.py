@@ -176,6 +176,40 @@ reduced_data = [
         'WY')
     ]
 
+
+# i made this a list so it could be processed by the functions that we are using
+slo_data = [data.CountyDemographics(
+    # age
+    {'Percent 65 and Older': 17.5,
+         'Percent Under 18 Years': 18.1,
+         'Percent Under 5 Years': 4.8},
+    # county
+    'San Luis Obispo County',
+    # education
+    {"Bachelor's Degree or Higher": 31.5,
+               'High School or Higher': 89.6},
+    # ethnicities
+    {'American Indian and Alaska Native Alone': 1.4,
+                 'Asian Alone': 3.8,
+                 'Black Alone': 2.2,
+                 'Hispanic or Latino': 22.0,
+                 'Native Hawaiian and Other Pacific Islander Alone': 0.2,
+                 'Two or More Races': 3.4,
+                 'White Alone': 89.0,
+                 'White Alone, not Hispanic or Latino': 69.5},
+    # income
+    {'Median Household Income': 58697,
+            'Per Capita Income': 29954,
+            'Persons Below Poverty Level': 14.3},
+    # population
+    {'2010 Population': 269637,
+                '2014 Population': 279083,
+                'Population Percent Change': 3.5,
+                'Population per Square Mile': 81.7},
+    # state
+    'CA'
+)]
+
 class TestCases(unittest.TestCase):
     pass
 
@@ -196,8 +230,67 @@ class TestCases(unittest.TestCase):
     # Part 2
     # test filter_by_state
 
+    # to test filter by state, we are told that there are 58 counties in the full set of data that should be in CA,
+    # so, to verify that the function works, we will be checking the length of
+    def test_filter_by_state(self):
+        input_demographics = full_data
+        expected = 58
+        actual = len(hw3.filter_by_state(input_demographics, 'CA'))
+        self.assertEqual(expected, actual)
+
+
+    # we are also told in the description that the counties would have a total population of 38802500 so we will use the
+    # population total function to find the total population of the counties returned by this function.
+    def test_filter_by_state2_population(self):
+        input_demographics = full_data
+        expected = 38802500
+        actual = hw3.population_total(hw3.filter_by_state(input_demographics, 'CA'))
+        self.assertEqual(expected, actual)
+
     # Part 3
+
+
     # test population_by_education
+    # since we wer provided that 87911.145 people in slo county have a bachelors degree or higher we will use this
+    # information as a testing point.
+
+    def test_population_by_education(self):
+        input_demographics = slo_data
+        expected = 87911.145 # number based off of data, can not have .145 people
+        actual = hw3.population_by_education(input_demographics, 'Bachelor\'s Degree or Higher')
+        self.assertEqual(expected, actual)
+
+    # test case when the input education is not a valid level of education
+    def test_population_by_education2(self):
+        input_demographics = slo_data
+        expected = 0
+        actual = hw3.population_by_education(input_demographics, '1st Degree Burn')
+        self.assertEqual(expected, actual)
+
+
+    # test population_by_ethnicity using slo_data
+    # ethnicity is in ethnicities
+    def test_population_by_ethnicity(self):
+        input_demographics = slo_data
+        expected = 10605.154
+        actual = hw3.population_by_ethnicity(input_demographics, 'Asian Alone')
+        self.assertEqual(expected, actual)
+    # ethnicity not in ethnicities
+    def test_population_by_ethnicity2(self):
+        input_demographics = slo_data
+        expected = 0
+        actual = hw3.population_by_ethnicity(input_demographics, 'Hippo')
+        self.assertEqual(expected, actual)
+
+    # test population_below_poverty_level
+    def test_population_below_poverty_level1(self):
+        input_demographics = slo_data
+        expected = 39908.869
+        actual = hw3.population_below_poverty_level(input_demographics)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_population_below
+
     # test population_by_ethnicity
     # test population_below_poverty_level
 
