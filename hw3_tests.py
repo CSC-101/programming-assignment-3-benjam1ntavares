@@ -353,12 +353,134 @@ class TestCases(unittest.TestCase):
         self.assertAlmostEqual(expected, actual, places=2)
 
     # Part 5
+
     # test education_greater_than
+    def test_education_greater_than(self):
+        counties = slo_data
+        key = "Bachelor's Degree or Higher"
+        threshold = 7
+        expected = ['San Luis Obispo County']
+        actual = hw3.county_list_names(hw3.education_greater_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+    def test_education_greater_than2(self):
+        counties = slo_data
+        key = "Bachelor's Degree or Higher"
+        threshold = 50
+        expected = []
+        actual = hw3.county_list_names(hw3.education_greater_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
     # test education_less_than
+    def test_education_less_than(self):
+        counties = slo_data
+        key = "Bachelor's Degree or Higher"
+        threshold = 50
+        expected = ['San Luis Obispo County']
+        actual = hw3.county_list_names(hw3.education_less_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+
+    def test_education_less_than2(self):
+        counties = slo_data
+        key = "Bachelor's Degree or Higher"
+        threshold = 7
+        expected = []
+        actual = hw3.county_list_names(hw3.education_less_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+
+    # test education greater than with a full set of data, since both are essentially the same function, no need to do
+    # this twice
+
+    # all reduced data counties should be in this range
+    def test_education_greater_than3(self):
+        counties = reduced_data
+        key = "Bachelor's Degree or Higher"
+        threshold = 9
+        expected = ['Autauga County','Crawford County', 'San Luis Obispo County','Yolo County','Butte County',
+                    'Pettis County','Weston County']
+        actual = hw3.county_list_names(hw3.education_greater_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+    # some reduced data counties will not be in this range
+
+    def test_education_greater_than4(self):
+        counties = reduced_data
+        key = "Bachelor's Degree or Higher"
+        threshold = 17
+        expected = ['Autauga County','San Luis Obispo County','Yolo County', 'Butte County', 'Weston County']
+        actual = hw3.county_list_names(hw3.education_greater_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+
     # test ethnicity_greater_than
+    def test_ethnicity_greater_than(self):
+        counties = slo_data
+        key = "Asian Alone"
+        threshold = 2.1
+        expected = ['San Luis Obispo County']
+        actual = hw3.county_list_names(hw3.ethnicity_greater_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+    def test_ethnicity_greater_than2(self):
+        counties = slo_data
+        key = "Asian Alone"
+        threshold = 4
+        expected = []
+        actual = hw3.county_list_names(hw3.ethnicity_greater_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+
     # test ethnicity_less_than
+    def test_ethnicity_less_than(self):
+        counties = slo_data
+        key = "Asian Alone"
+        threshold = 4
+        expected = ['San Luis Obispo County']
+        actual = hw3.county_list_names(hw3.ethnicity_less_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+    def test_ethnicity_less_than2(self):
+        counties = slo_data
+        key = 'Asian Alone'
+        threshold = 1.1
+        expected = []
+        actual = hw3.county_list_names(hw3.ethnicity_less_than(counties, key, threshold))
+        self.assertEqual(expected, actual)
+
+
+
     # test below_poverty_level_greater_than
+    def test_below_poverty_level_greater_than(self):
+        counties = slo_data
+        threshold = 13
+        expected = ['San Luis Obispo County']
+        actual = hw3.county_list_names(hw3.below_poverty_level_greater_than(counties, threshold))
+        self.assertEqual(expected, actual)
+
+    def test_below_poverty_level_greater_than2(self):
+        counties = slo_data
+        threshold = 20
+        expected =[]
+        actual = hw3.county_list_names(hw3.below_poverty_level_greater_than(counties, threshold))
+        self.assertEqual(expected, actual)
+
     # test below_poverty_level_less_than
+
+    def test_below_poverty_level_less_than(self):
+        counties = slo_data
+        threshold = 13
+        expected = []
+        actual = hw3.county_list_names(hw3.below_poverty_level_less_than(counties, threshold))
+        self.assertEqual(expected, actual)
+
+    def test_below_poverty_level_less_than2(self):
+        counties = slo_data
+        threshold = 20
+        expected =['San Luis Obispo County']
+        actual = hw3.county_list_names(hw3.below_poverty_level_less_than(counties, threshold))
+        self.assertEqual(expected, actual)
 
 
 

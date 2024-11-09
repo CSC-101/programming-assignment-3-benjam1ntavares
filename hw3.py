@@ -137,6 +137,90 @@ def percent_below_poverty_level(counties: list[CountyDemographics]) -> float:
         return 0
 
 
+# Part 5
+#######################################################################################################################
+
+#education_greater_than
+########################################################################################################################
+# inputs: counties: list[CountyDemographics, key: str (education_level), threshold: float (target Percentage)
+# outputs: list[CountyDemographics]
+
+# this function will iterate through all of the county demographics objects, and return the counties whose key education
+# level is greater than that of the threshold
+
+def education_greater_than(counties: list[CountyDemographics], key: str, threshold: float) -> list[CountyDemographics]:
+    filtered_counties = []
+    for county in counties:
+        if county.education.get(key):
+            if county.education.get(key) > threshold:
+                filtered_counties.append(county)
+    return filtered_counties
+
+def education_less_than(counties: list[CountyDemographics], key: str, threshold: float) -> list[CountyDemographics]:
+    filtered_counties = []
+    for county in counties:
+        if county.education.get(key):
+            if county.education.get(key) < threshold:
+                filtered_counties.append(county)
+    return filtered_counties
+
+# helper funciton to list the names of the counties in filtered county lists to simplify testing
+# will return a list of county names
+def county_list_names(counties: list[CountyDemographics]) -> list[str]:
+    county_names = []
+    for county in counties:
+        county_names.append(county.county)
+    return county_names
+
+
+# ethnicity_greater_than
+#######################################################################################################################
+# inputs: counties: list[CountyDemographics, key: str (ethnicity), threshold: float (target Percentage)
+# outputs: list[CountyDemographics]
+# same funcitonality as education greater than, however now the input key should be an ethnicity
+
+# again I will use the county_list_names for ease of testing
+
+def ethnicity_greater_than(counties: list[CountyDemographics], key: str, threshold: float) -> list[CountyDemographics]:
+    filtered_counties = []
+    for county in counties:
+        if county.ethnicities.get(key):
+            if county.ethnicities.get(key) > threshold:
+                filtered_counties.append(county)
+    return filtered_counties
+
+def ethnicity_less_than(counties: list[CountyDemographics], key: str, threshold: float) -> list[CountyDemographics]:
+    filtered_counties = []
+    for county in counties:
+        if county.ethnicities.get(key):
+            if county.ethnicities.get(key) < threshold:
+                filtered_counties.append(county)
+    return filtered_counties
+
+
+# below_poverty_level_greater_than
+########################################################################################################################
+# inputs: counties: list[CountyDemographics, threshold: float (target Percentage)
+# outputs: list[CountyDemographics]
+# similar functionality to education greater than, however now there should be no input key.
+
+def below_poverty_level_greater_than(counties: list[CountyDemographics], threshold: float) -> list[CountyDemographics]:
+    filtered_counties = []
+    for county in counties:
+        if county.income.get('Persons Below Poverty Level'):
+            if county.income.get('Persons Below Poverty Level') > threshold:
+                filtered_counties.append(county)
+    return filtered_counties
+
+def below_poverty_level_less_than(counties: list[CountyDemographics], threshold: float) -> list[CountyDemographics]:
+    filtered_counties = []
+    for county in counties:
+        if county.income.get('Persons Below Poverty Level'):
+            if county.income.get('Persons Below Poverty Level') < threshold:
+                filtered_counties.append(county)
+    return filtered_counties
+
+
 
 
 
