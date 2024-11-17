@@ -28,11 +28,11 @@ def population_total(demographics: list[CountyDemographics]) -> int:
 # the filter_by_state function will take the input list of county demographics, and it will filter the data to only
 # return the county demographics from a specific state specified by the state abbreviation i.e CA
 def filter_by_state(demographics: list[CountyDemographics], state_ab: str) -> list[CountyDemographics]:
-    filtered_demogrphics = []
+    filtered_demographics = []
     for county in demographics:
         if county.state == state_ab.upper():
-            filtered_demogrphics.append(county)
-    return filtered_demogrphics
+            filtered_demographics.append(county)
+    return filtered_demographics
 
 # Part 3
 ########################################################################################################################
@@ -49,13 +49,14 @@ def filter_by_state(demographics: list[CountyDemographics], state_ab: str) -> li
 # before we multiply  it by the total population
 
 def population_by_education(counties: list[CountyDemographics], education_level: str) -> int:
+    educated_pop = []
     for county in counties:
         if f'{education_level}' in county.education:
             percent_educated = county.education.get(education_level)
-            return (percent_educated * 10**-2) * population_total(counties)
+            educated_pop.append((percent_educated * 10**-2) * county.population.get('2014 Population'))
         else:
             return 0
-
+    return sum(educated_pop)
 
 # population_by_ethnicity
 ########################################################################################################################
@@ -65,13 +66,14 @@ def population_by_education(counties: list[CountyDemographics], education_level:
 # similar functionality to population_by_education
 
 def population_by_ethnicity(counties: list[CountyDemographics], ethnicity: str) -> int:
+    ethnic_pop = []
     for county in counties:
         if f'{ethnicity}' in county.ethnicities:
-            ethnicity_percentage = county.ethnicities.get(ethnicity)
-            return (ethnicity_percentage * 10**-2) * population_total(counties)
+            percent_educated = county.ethnicities.get(ethnicity)
+            ethnic_pop.append((percent_educated * 10**-2) * county.population.get('2014 Population'))
         else:
             return 0
-
+    return sum(ethnic_pop)
 
 # population_below_poverty
 ########################################################################################################################
@@ -219,6 +221,8 @@ def below_poverty_level_less_than(counties: list[CountyDemographics], threshold:
             if county.income.get('Persons Below Poverty Level') < threshold:
                 filtered_counties.append(county)
     return filtered_counties
+
+
 
 
 

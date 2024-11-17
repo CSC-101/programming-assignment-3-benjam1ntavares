@@ -309,14 +309,14 @@ class TestCases(unittest.TestCase):
     def test_percent_by_education2(self):
         input_demographics = reduced_data
         education = "Bachelor's Degree or Higher"
-        expected = 20.9
+        expected = 29.75
         actual = hw3.percent_by_education(input_demographics,education)
         self.assertAlmostEqual(expected, actual)
 
     def test_percent_by_education3(self):
         input_demographics = full_data
         education = "Bachelor's Degree or Higher"
-        expected = 20.9
+        expected = 29.75
         actual = hw3.percent_by_education(input_demographics,education)
         self.assertAlmostEqual(expected, actual)
 
@@ -334,9 +334,9 @@ class TestCases(unittest.TestCase):
     def test_percent_by_ethnicity2(self):
         input_demographics = full_data
         ethnicity = 'Asian Alone'
-        expected = 1.1
+        expected = 5.44
         actual = hw3.percent_by_ethnicity(input_demographics,ethnicity)
-        self.assertAlmostEqual(expected, actual)
+        self.assertAlmostEqual(expected, actual, places=2)
 
 
     # test percent_below_poverty_level
